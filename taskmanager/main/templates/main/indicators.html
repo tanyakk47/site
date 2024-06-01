@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Indicators Graph</title>
+    <style>
+        body {
+            background-color: #f0f0f0; /* Light gray background */
+            font-family: Arial, sans-serif; /* Choose a readable font */
+            color: #000; /* Black text */
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff; /* White container background */
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Soft shadow effect */
+        }
+        h2 {
+            text-align: center;
+            color: #333; /* Dark gray heading color */
+        }
+        form {
+            margin-bottom: 20px;
+        }
+        button {
+            background-color: #000; /* Black button background */
+            color: #fff; /* White button text color */
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease; /* Smooth transition */
+        }
+        button:hover {
+            background-color: #333; /* Darker shade on hover */
+        }
+        a {
+            color: #000; /* Black link text */
+            text-decoration: none;
+            transition: color 0.3s ease; /* Smooth transition */
+        }
+        a:hover {
+            color: #333; /* Darker shade on hover */
+        }
+        img {
+            width: 100%;
+            height: auto;
+            max-width: 100%;
+            display: block;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Виберіть індикатор</h2>
+        <form id = "MyForm" method="post" action = "{% url 'indtemp' %}">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" name="price">Submit</button>
+        </form>
+        <h2>Indicators Graph</h2>
+        {% if imageprice %}
+            <img src="data:image/png;base64,{{ imageprice }}" alt="Indicators Graph">
+        {% else %}
+            <p>No data available.</p>
+        {% endif %}
+        <a href="{% url 'home' %}">HOME</a>
+    </div>
+</body>
+</html>
